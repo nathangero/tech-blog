@@ -1,0 +1,3 @@
+/*
+    all get requests to RENDER specific html pages
+*/
