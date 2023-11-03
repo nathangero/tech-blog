@@ -5,3 +5,9 @@ Post have many comments
 Comments belong to many Users and Posts
 
 */
+
+const User = require("./User");
+
+
+
+module.exports = { User }
