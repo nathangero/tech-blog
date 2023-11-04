@@ -103,6 +103,30 @@ router.post("/logout", (req, res) => {
     } else {
         res.status(404).end();
     }
+});
+
+
+// Update user's name
+router.put("/:id", async (req, res) => {
+    const updateData = {
+        username: req.body.username
+    }
+
+    try {
+        const data = await User.update(updateData, {
+            where: {
+                id: req.params.id
+            }
+        });
+
+        if (data[0]) {
+            res.status(200).json({ message: "Successfully changed username" });
+        } else {
+            res.status(404).json({ "message": "No user with this id!" });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
 })
 
 
