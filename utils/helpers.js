@@ -1,6 +1,5 @@
 module.exports = {
     formatDate(date) {
-        console.log("date:", date);
         const months = {
             0: "Jan",
             1: "Feb",
