@@ -82,6 +82,16 @@ router.post("/", async (req, res) => {
     }
 });
 
+// Add a comment to a post
+router.post("/addComment/", async (req, res) => {
+    try {
+        const data = await Comment.create(req.body);
+        
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
 
 // Update a post's title and content
 router.put("/:id", async (req, res) => {
@@ -102,7 +112,8 @@ router.put("/:id", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-})
+});
+
 
 // Delete a post
 router.delete("/:id", async (req, res) => {
