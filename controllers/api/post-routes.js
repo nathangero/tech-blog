@@ -80,7 +80,31 @@ router.post("/", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
+});
+
+
+// Update a post's title and content
+router.put("/:id", async (req, res) => {
+    const postId = req.params.id;
+
+    try {
+        const data = await Post.update(req.body, {
+            where: {
+                id: postId
+            }
+        });
+
+        if (data[0]) {
+            res.status(200).json({ message: "Successfully updated post" });
+        } else {
+            res.status(404).json({ "message": `No post with id ${postId}` });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
 })
+
+// Delete a post
 
 
 module.exports = router;

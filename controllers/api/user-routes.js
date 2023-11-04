@@ -108,21 +108,19 @@ router.post("/logout", (req, res) => {
 
 // Update user's name
 router.put("/:id", async (req, res) => {
-    const updateData = {
-        username: req.body.username
-    }
+    const userId = req.params.id;
 
     try {
-        const data = await User.update(updateData, {
+        const data = await User.update(req.body, {
             where: {
-                id: req.params.id
+                id: userId
             }
         });
 
         if (data[0]) {
             res.status(200).json({ message: "Successfully changed username" });
         } else {
-            res.status(404).json({ "message": "No user with this id!" });
+            res.status(404).json({ "message": `No user with id ${userId}` });
         }
     } catch (error) {
         res.status(500).json(error);
