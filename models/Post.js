@@ -3,13 +3,7 @@ const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 const User = require("./User");
 
-class Post extends Model {
-
-}
-
-/*
-    id, title, description, date(sql should do this automatically), fk_user_id
-*/
+class Post extends Model {}
 
 Post.init(
     {
