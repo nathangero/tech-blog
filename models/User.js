@@ -41,7 +41,7 @@ User.init(
         hooks: {
             async beforeCreate (newUserData) {
                 console.log("newUserData:", newUserData);
-                newUserData.password = await bcrypt.hash(newUserData.password, process.env.SALT_ROUNDS);
+                newUserData.password = await bcrypt.hash(newUserData.password, parseInt(process.env.SALT_ROUNDS));
                 return newUserData;
             }
         },
