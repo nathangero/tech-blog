@@ -7,10 +7,10 @@ async function seedAll() {
     await sequelize.sync({ force: true });
 
     await seedUser();
-    console.log("---- SEEDED USERS ----");
+    console.log("---- SEEDED USERS ----\n\n");
 
     await seedPost();
-    console.log("---- SEEDED POSTS ----");
+    console.log("---- SEEDED POSTS ----\n\n");
 
     await seedComment();
     console.log("---- SEEDED COMMENTS ----");
