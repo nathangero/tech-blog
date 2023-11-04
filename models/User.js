@@ -3,7 +3,12 @@ const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 require("dotenv").config();
 
-class User extends Model {}
+class User extends Model {
+    comparePassword(enteredPassword) {
+        // Password entered must be first parameter
+        return bcrypt.compareSync(enteredPassword, this.password); 
+    }
+}
 
 User.init(
     {
