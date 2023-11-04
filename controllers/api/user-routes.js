@@ -44,8 +44,54 @@ router.get("/:id", async (req, res) => {
 
 // Create new user
 router.post("/", async (req, res) => {
-    
-})
+    try {
+        const data = await User.create(req.body);
+        
+        req.session.save(() => {
+            req.session.loggedIn = true
+
+            res.status(200).json(data);
+        })
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// Login a user
+router.post("/login", async (req, res) => {
+    const email = req.body.email;
+    const enteredPassword = req.body.password;
+
+    try {
+        const data = await User.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        // Check if user exists
+        if (!data) {
+            res.status(404).json({ message: "User doesn't exist. Please try another login or sign up." });
+            return;
+        }
+
+        // Check if password is correct
+        const isPasswordValid = data.comparePassword(enteredPassword);
+        if (!isPasswordValid) {
+            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            return;
+        }
+
+        req.session.save(() => {
+            req.session.loggedIn = true // remember user's login session
+
+            res.status(200).json({ user: data, message: "You're logged in"}); // Send back user data
+        })
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
 
 
 module.exports = router;
