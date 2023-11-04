@@ -15,11 +15,30 @@ User.hasMany(Comment, {
     onDelete: 'CASCADE'
 });
 
-// Post has many Comments
+// Allow Post to include Comment
 Post.hasMany(Comment, {
     foreignKey: "post_id",
     onDelete: 'CASCADE'
 });
+
+// Allow Post to include User
+Post.belongsTo(User, {
+    foreignKey: "user_id",
+    onDelete: 'CASCADE'
+})
+
+// Allow Comment to include User model in sequelize
+Comment.belongsTo(User, {
+    foreignKey: "user_id",
+    onDelete: 'CASCADE'
+});
+
+
+
+// Comment.belongsTo(Post, {
+//     foreignKey: "post_id",
+//     onDelete: 'CASCADE'
+// });
 
 
 module.exports = { User, Post, Comment }

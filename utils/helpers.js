@@ -19,5 +19,5 @@ module.exports = {
         const year = date.getFullYear();
 
         return `${month} ${day}, ${year}`
-    }
+    },
 }

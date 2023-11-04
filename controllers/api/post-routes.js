@@ -6,14 +6,25 @@ const { User, Post, Comment } = require("../../models");
 router.get("/", async (req, res) => {
     try {
         const data = await Post.findAll({
-            include: [{ model: Comment }],
+            include: [
+                {
+                    model: Comment,
+                    attributes: ["id", "content", "createdAt"],
+                    include: [ // Get the username of who made the comment
+                        {
+                            model: User,
+                            attributes: ["username"]
+                        }
+                    ]
+                },
+            ],
             attributes: {
                 include: [
                     [
                         sequelize.literal(
                             `(SELECT user.username FROM user WHERE post.user_id = user.id)`
                         ),
-                        "posters_name",
+                        "post_author",
                     ]
                 ]
             }

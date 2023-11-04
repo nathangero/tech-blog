@@ -11,21 +11,22 @@ router.get("/", async (req, res) => {
     try {
         const data = await Post.findAll({
             include: [{ model: Comment }],
-            attributes: {
-                include: [
-                    [
-                        sequelize.literal(
-                            `(SELECT user.username FROM user WHERE post.user_id = user.id)`
-                        ),
-                        "posters_name",
-                    ]
-                ]
-            }
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+                [sequelize.literal(
+                    `(SELECT user.username FROM user WHERE post.user_id = user.id)`
+                ),
+                "post_author"],
+            ]
         });
 
 
         const posts = data.map((element) => element.get({ plain: true }));
-        // console.log("posts:", posts);
+        console.log("posts:", posts);
         console.log("req.session.loggedIn:", req.session.loggedIn);
 
         res.render("homepage", {
