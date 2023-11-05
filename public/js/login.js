@@ -22,8 +22,8 @@ async function loginUser(event) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(login),
-        })
-        console.log("response:", response);
+        });
+
         if (response.ok) {
             // If user is loggeed in then send them back to the homepage
             console.log("Logged in!");

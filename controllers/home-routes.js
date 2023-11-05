@@ -98,7 +98,7 @@ router.get("/post/:id", async (req, res) => {
     }
 });
 
-// Go to the user's dashboard if the user is logged in
+// Go to the user's dashboard if the user is logged in, and show all their posts
 router.get("/dashboard", withAuth, async (req, res) => {
     const userId = req.session.userId;
     

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { User, Post, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // Get all posts, its comments, and the username that posted it
 router.get("/", async (req, res) => {
@@ -89,6 +90,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// Get all posts of a user
 router.get("/dashboard/:userId", async (req, res) => {
     try {
         const data = await Post.findAll({
@@ -111,18 +113,14 @@ router.get("/dashboard/:userId", async (req, res) => {
 })
 
 // Create a new post
-router.post("/", async (req, res) => {
+router.post("/create", withAuth, async (req, res) => {
     const newPost = req.body;
-
-    if (req.session.userId) { // Check if userId is in the session. Should exist from user login
-        const userId = req.session.userId;
-        newPost["user_id"] = userId;
-    }
+    const userId = req.session.userId;
+    newPost["user_id"] = userId;
 
     try {
         const data = await Post.create(newPost);
-        
-        // TODO: change to res.redirect?
+
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
