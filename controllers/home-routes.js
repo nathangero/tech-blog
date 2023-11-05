@@ -37,7 +37,7 @@ router.get("/", async (req, res) => {
 
         const posts = data.map((element) => element.get({ plain: true }));
         // console.log("posts:", posts);
-        
+
         console.log("req.session.loggedIn:", req.session.loggedIn);
 
         res.render("homepage", {
@@ -81,6 +81,7 @@ router.get("/post/:id", async (req, res) => {
         });
 
         const loggedIn = req.session.loggedIn;
+        
         if (data) {
             const post = data.get({ plain: true });
             // console.log("users:", users)

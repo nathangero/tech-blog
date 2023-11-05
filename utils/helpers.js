@@ -18,10 +18,14 @@ module.exports = {
             10: "Nov",
             11: "Dec"
         }
-        const day = date.getDate();
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
 
-        return `${month} ${day}, ${year}`
+        const month = months[date.getMonth()];
+        const day = date.getDate();
+        const year = date.getFullYear();
+        
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+
+        return `${month} ${day}, ${year} - ${hour}:${minute}`
     },
 }

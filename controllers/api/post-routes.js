@@ -50,18 +50,30 @@ router.get("/:id", async (req, res) => {
     const postId = req.params.id;
     
     try {
-        const data = await Post.findByPk(postId, {
-            include: [{ model: Comment }],
-            attributes: {
-                include: [
-                    [
-                        sequelize.literal(
-                            `(SELECT user.username FROM user WHERE post.user_id = user.id)`
-                        ),
-                        "posters_name",
+        const data = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                    attributes: [
+                        "id",
+                        "content",
+                        "createdAt",
+                        [sequelize.literal(
+                            `(SELECT user.username FROM user WHERE comments.user_id = user.id)`
+                        ), "comment_author"],
                     ]
-                ]
-            }
+                },
+            ],
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+                [sequelize.literal(
+                    `(SELECT user.username FROM user WHERE post.user_id = user.id)`
+                ), "post_author"],
+            ]
         });
 
         if (data) {
@@ -89,6 +101,7 @@ router.post("/", async (req, res) => {
     try {
         const data = await Post.create(newPost);
         
+        // TODO: change to res.redirect?
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
@@ -107,6 +120,7 @@ router.post("/addComment/", async (req, res) => {
     try {
         const data = await Comment.create(newComment);
         
+        // TODO: change to res.redirect?
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
@@ -125,6 +139,7 @@ router.put("/:id", async (req, res) => {
         });
 
         if (data[0]) {
+            // TODO: change to res.redirect?
             res.status(200).json({ message: "Successfully updated post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });
@@ -147,6 +162,7 @@ router.delete("/:id", async (req, res) => {
         });
 
         if (data) {
+            // TODO: change to res.redirect("homepage");
             res.status(200).json({ message: "Successfully deleted post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });
