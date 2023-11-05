@@ -1,3 +1,5 @@
-#form-post {
+#form-post,
+#form-update-post,
+#form-comment {
     visibility: hidden;
 }

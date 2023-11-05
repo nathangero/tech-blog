@@ -142,11 +142,13 @@ router.post("/addComment/:postId", withAuth, async (req, res) => {
 });
 
 // Update a post's title and content
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/update/:id", withAuth, async (req, res) => {
     const postId = req.params.id;
     const updatedPost = req.body;
     updatedPost["user_id"] = req.session.userId;
 
+    console.log("updatedPost:", updatedPost);
+    console.log("postId:", postId);
     try {
         const data = await Post.update(updatedPost, {
             where: {
@@ -155,12 +157,12 @@ router.put("/:id", withAuth, async (req, res) => {
         });
 
         if (data[0]) {
-            // TODO: change to res.redirect?
             res.status(200).json({ message: "Successfully updated post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });
         }
     } catch (error) {
+        console.log("errored out at .put(/update/:id)")
         res.status(500).json(error);
     }
 });
