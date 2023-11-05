@@ -1,1 +1,11 @@
 {{!-- Should be able to edit posts here --}}
+<section>
+  <header>{{post.title}}</header>
+  <p>{{formatDate post.createdAt}}</p>
+  <p>{{post.content}}</p>
+  <p>{{post.post_author}}</p>
+
+  {{#each post.comments as |comment|}}
+  {{> comment-details}}
+  {{/each}}
+</section>
