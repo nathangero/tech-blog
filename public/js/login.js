@@ -1,4 +1,4 @@
-const loginUser = async (event) => {
+async function loginUser(event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -23,7 +23,7 @@ const loginUser = async (event) => {
             },
             body: JSON.stringify(login),
         })
-
+        console.log("response:", response);
         if (response.ok) {
             // If user is loggeed in then send them back to the homepage
             console.log("Logged in!");
@@ -36,5 +36,4 @@ const loginUser = async (event) => {
     }
 }
 
-
-document.getElementById("form-login").addEventListener("submit", loginUser);
+document.querySelector("#form-login").addEventListener("submit", loginUser);

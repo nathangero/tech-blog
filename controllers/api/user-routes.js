@@ -43,10 +43,10 @@ router.get("/:id", async (req, res) => {
 
 
 // Create new user
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const data = await User.create(req.body);
-        
+
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userId = data.id; // Save the id in the session to use when making a post or comment
@@ -62,8 +62,6 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
     const email = req.body.email;
     const enteredPassword = req.body.password;
-    console.log("email:", email);
-    console.log("enteredPassword:", enteredPassword);
 
     try {
         const data = await User.findOne({
@@ -88,7 +86,6 @@ router.post("/login", async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true; // remember user's login session
             req.session.userId = data.id; // Save the id in the session to use when making a post or comment
-
             res.status(200).json({ user: data, message: "You're logged in"}); // Send back user data
         })
 

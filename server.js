@@ -18,7 +18,7 @@ const sess = {
     saveUninitialized: false,
     cookie: {
         maxAge: parseInt(process.env.COOKIE_AGE),
-        secure: true,
+        secure: false,
         sameSite: 'strict',
     },
     store: new SequelizeStore({
@@ -32,6 +32,7 @@ const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+// app.set('trust proxy', 1);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
