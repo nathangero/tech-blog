@@ -183,7 +183,6 @@ router.delete("/:id", withAuth, async (req, res) => {
         });
 
         if (data) {
-            // TODO: change to res.redirect("homepage");
             res.status(200).json({ message: "Successfully deleted post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });

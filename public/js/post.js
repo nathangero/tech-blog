@@ -37,10 +37,10 @@ async function addNewPost(event) {
             // Send the user back to the dashboard to see the added post
             document.location.replace("/dashboard");
         } else {
-            alert("Invalid email and/or password");
+            alert("Couldn't add new post.");
         }
     } catch (error) {
-        alert("Couldn't add new post");
+        alert("Error from fetch. Couldn't add new post");
     }
 }
 

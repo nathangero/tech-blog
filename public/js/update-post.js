@@ -41,7 +41,7 @@ async function updatePost(event) {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
+            // Send the user back to the dashboard to see the updated post
             document.location.replace("/dashboard");
         } else {
             alert("Couldn't update post");
@@ -79,13 +79,13 @@ async function deletePost() {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
+            // Send the user back to the dashboard since the post is deleted now
             document.location.replace("/dashboard");
         } else {
-            alert("Couldn't update post");
+            alert(`Couldn't delete post ${postId}`);
         }
     } catch (error) {
-        alert("Couldn't add new post");
+        alert(`Error with fetch. Couldn't delete post ${postId}`);
     }
 }
 
