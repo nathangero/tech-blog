@@ -5,8 +5,8 @@
   <p>{{post.content}}</p>
   <p>{{post.post_author}}</p>
 
-  {{!-- If this is the user's post then show the edit/delete buttons --}}
-  {{#if loggedIn}}
+  {{!-- If this is the user's post and logged in then show the edit/delete buttons --}}
+  {{#if (canAddPost loggedIn fromDashboard)}}
   <button id="button-delete-post">Delete</button>
   <button id="button-update-post">Update</button>
   {{/if}}
@@ -25,11 +25,27 @@
   {{> comment-details}}
   {{/each}}
 
-  {{!-- Allow adding a comment if coming from the Homepage --}}
-  {{!-- TODO: User does need to be logged in but shouldn't be the owner of the post --}}
-  {{#unless loggedIn}}
+  {{!-- Allow adding a comment if coming from the Homepage and logged in --}}
+  {{#if (canAddComment loggedIn fromHomepage)}}
   <button id="button-make-comment">Add Comment</button>
-  {{/unless}}
+  {{/if}}
+
+  <form id="form-comment" class="d-flex flex-column  w-50">
+    <input id="comment-title" type="text" class="form-control" placeholder="Title">
+    <textarea id="comment-content" type="text" class="form-control" placeholder="Comment"></textarea>
+    
+    <div>
+      <button id="button-cancel-comment">Cancel</button>
+      <button id="button-add-comment">Post Comment</button>
+    </div>
+  </form>
 </section>
 
+{{!-- Decide which file to load --}}
+{{#if (canAddPost loggedIn fromDashboard)}}
 <script src="../../js/update-post.js"></script>
+{{/if}}
+
+{{#if (canAddComment loggedIn fromHomepage)}}
+<script src="../../js/comment.js"></script>
+{{/if}}

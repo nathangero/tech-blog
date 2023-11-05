@@ -2,11 +2,12 @@ function toggleEditPost(event, updatePost) {
     event.preventDefault();
     event.stopPropagation();
 
-    // Show the new post form
+    // Show/Hide the new post form
     document.getElementById("form-update-post").style.visibility = updatePost ? "visible" : "hidden";
     document.getElementById("button-update-post").style.visibility = updatePost ? "hidden" : "visible";
     document.getElementById("button-delete-post").style.visibility = updatePost ? "hidden" : "visible";
 }
+
 
 async function updatePost(event) {
     event.preventDefault();
@@ -61,6 +62,7 @@ async function promptForDelete(event) {
         toggleEditPost(event, false);
     }
 }
+
 
 async function deletePost() {    
     // Get post id from address bar
