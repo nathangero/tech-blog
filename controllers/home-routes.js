@@ -81,7 +81,7 @@ router.get("/post/:id", async (req, res) => {
         });
 
         const loggedIn = req.session.loggedIn;
-        
+
         if (data) {
             const post = data.get({ plain: true });
             // console.log("users:", users)
@@ -98,6 +98,8 @@ router.get("/post/:id", async (req, res) => {
     }
 });
 
-
+router.get("/login", (req, res) => {
+    res.render("login");
+});
 
 module.exports = router;
