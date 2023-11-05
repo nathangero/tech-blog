@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// Show a specific post
+// Show a specific post from a user from the Homepage
 router.get("/post/:id", async (req, res) => {
     try {
         const data = await Post.findByPk(req.params.id, {
@@ -82,17 +82,15 @@ router.get("/post/:id", async (req, res) => {
             ]
         });
 
-        const loggedIn = req.session.loggedIn;
 
         if (data) {
             const post = data.get({ plain: true });
             // console.log("users:", users)
             res.render("post", {
-                post, 
-                loggedIn
+                post,
             });
         } else {
-            res.status(404).json({ message: `Post ${postId} doesn't exist`});
+            res.status(404).json({ message: `Post ${req.params.id} doesn't exist`});
         }
     } catch (error) {
         console.log(error);
@@ -127,6 +125,50 @@ router.get("/dashboard", withAuth, async (req, res) => {
             loggedIn: req.session.loggedIn
         });
     } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+// Show a specific post from a user from the Dashboard
+router.get("/dashboard/post/:id", withAuth, async (req, res) => {
+    try {
+        const data = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                    attributes: [
+                        "id",
+                        "content",
+                        "createdAt",
+                        [sequelize.literal(
+                            `(SELECT user.username FROM user WHERE comments.user_id = user.id)`
+                        ), "comment_author"],
+                    ]
+                },
+            ],
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+            ]
+        });
+
+        const loggedIn = req.session.loggedIn;
+
+        if (data) {
+            const post = data.get({ plain: true });
+            // console.log("users:", users)
+            res.render("post", {
+                post,
+                loggedIn
+            });
+        } else {
+            res.status(404).json({ message: `Post ${postId} doesn't exist`});
+        }
+    } catch (error) {
+        console.log(error);
         res.status(500).json(error);
     }
 });

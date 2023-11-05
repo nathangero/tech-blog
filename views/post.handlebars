@@ -1,10 +1,12 @@
+{{!-- Show the clicked on post w/comments --}}
 <section>
   <header>{{post.title}}</header>
   <p>{{formatDate post.createdAt}}</p>
   <p>{{post.content}}</p>
   <p>{{post.post_author}}</p>
-  <p>POST'S USER ID {{post.user_id}}</p>
-  {{#if post.user_id}}
+
+  {{!-- If this is the user's post then show the edit/delete buttons --}}
+  {{#if loggedIn}}
   <button>Edit</button>
   <button>Delete</button>
   {{/if}}
@@ -12,4 +14,9 @@
   {{#each post.comments as |comment|}}
   {{> comment-details}}
   {{/each}}
+
+  {{!-- Allow adding a comment if coming from the Homepage --}}
+  {{#unless loggedIn}}
+  <button>Add Comment</button>
+  {{/unless}}
 </section>
