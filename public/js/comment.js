@@ -12,7 +12,40 @@ async function addComment(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log("@addComment");
+    const content = document.querySelector("#comment-content").value.trim();
+
+    if (!content) {
+        alert("Please fill out all fields");
+        return;
+    }
+
+    const newComment = {
+        content: content
+    }
+
+    // Get post id from address bar
+    let postId = window.location.pathname.split("/")[
+        window.location.pathname.split("/").length - 1
+    ]
+
+    try {
+        const response = await fetch(`/api/posts/addComment/${postId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newComment),
+        });
+
+        if (response.ok) {
+            // If user is loggeed in then send them back to the homepage
+            document.location.replace(`/post/${postId}`);
+        } else {
+            alert("Couldn't add comment");
+        }
+    } catch (error) {
+        alert("Couldn't add comment");
+    }
 }
 
 

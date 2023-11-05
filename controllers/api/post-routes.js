@@ -128,10 +128,13 @@ router.post("/create", withAuth, async (req, res) => {
 
 // Add a comment to a post
 router.post("/addComment/:postId", withAuth, async (req, res) => {
+    console.log("@addComment");
+
     const newComment = req.body;
     newComment["user_id"] = req.session.userId;
-    newComment["post_id"] = req.params.id;
+    newComment["post_id"] = req.params.postId;
 
+    console.log("newComment:", newComment);
     try {
         const data = await Comment.create(newComment);
         
