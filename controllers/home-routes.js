@@ -39,6 +39,7 @@ router.get("/", async (req, res) => {
         // console.log("posts:", posts);
 
         console.log("req.session.loggedIn:", req.session.loggedIn);
+        console.log("req.session.userId:", req.session.userId);
 
         res.render("homepage", {
             posts,
