@@ -28,4 +28,10 @@ module.exports = {
 
         return `${month} ${day}, ${year} - ${hour}:${minute}`
     },
+    canAddPost(isLoggedIn, fromDashboard) {
+        return isLoggedIn && fromDashboard;
+    },
+    canAddComment(isLoggedIn, fromHomepage) {
+        return isLoggedIn && fromHomepage;
+    }
 }

@@ -34,14 +34,13 @@ async function addNewPost(event) {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
-            console.log("Logged in!");
+            // Send the user back to the dashboard to see the added post
             document.location.replace("/dashboard");
         } else {
-            alert("Invalid email and/or password");
+            alert("Couldn't add new post.");
         }
     } catch (error) {
-        alert("Couldn't add new post");
+        alert("Error from fetch. Couldn't add new post");
     }
 }
 

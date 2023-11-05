@@ -128,10 +128,13 @@ router.post("/create", withAuth, async (req, res) => {
 
 // Add a comment to a post
 router.post("/addComment/:postId", withAuth, async (req, res) => {
+    console.log("@addComment");
+
     const newComment = req.body;
     newComment["user_id"] = req.session.userId;
-    newComment["post_id"] = req.params.id;
+    newComment["post_id"] = req.params.postId;
 
+    console.log("newComment:", newComment);
     try {
         const data = await Comment.create(newComment);
         
@@ -180,7 +183,6 @@ router.delete("/:id", withAuth, async (req, res) => {
         });
 
         if (data) {
-            // TODO: change to res.redirect("homepage");
             res.status(200).json({ message: "Successfully deleted post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });

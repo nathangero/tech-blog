@@ -53,7 +53,10 @@ router.get("/", async (req, res) => {
 });
 
 
-// Show a specific post from a user from the Homepage
+/**
+ * Show a specific post from a user from the Homepage.
+ * A user should be able to view any post without needing to be logged in
+ */
 router.get("/post/:id", async (req, res) => {
     try {
         const data = await Post.findByPk(req.params.id, {
@@ -88,6 +91,9 @@ router.get("/post/:id", async (req, res) => {
             // console.log("users:", users)
             res.render("post", {
                 post,
+                loggedIn: req.session.loggedIn, // User must be logged to create posts/comments
+                fromHomepage: true, // Determines if a comment can be added
+                fromDashboard: false // Determines if a post can be created
             });
         } else {
             res.status(404).json({ message: `Post ${req.params.id} doesn't exist`});
@@ -122,7 +128,9 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
         res.render("dashboard", {
             posts,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn, // User must be logged to create posts/comments
+            fromHomepage: false, // Determines if a comment can be added
+            fromDashboard: true // Determines if a post can be created
         });
     } catch (error) {
         res.status(500).json(error);
@@ -155,14 +163,14 @@ router.get("/dashboard/post/:id", withAuth, async (req, res) => {
             ]
         });
 
-        const loggedIn = req.session.loggedIn;
-
         if (data) {
             const post = data.get({ plain: true });
             // console.log("users:", users)
             res.render("post", {
                 post,
-                loggedIn
+                loggedIn: req.session.loggedIn, // User must be logged to create posts/comments
+                fromHomepage: false, // Determines if a comment can be added
+                fromDashboard: true // Determines if a post can be created
             });
         } else {
             res.status(404).json({ message: `Post ${postId} doesn't exist`});

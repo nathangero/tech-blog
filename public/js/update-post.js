@@ -2,11 +2,12 @@ function toggleEditPost(event, updatePost) {
     event.preventDefault();
     event.stopPropagation();
 
-    // Show the new post form
+    // Show/Hide the new post form
     document.getElementById("form-update-post").style.visibility = updatePost ? "visible" : "hidden";
     document.getElementById("button-update-post").style.visibility = updatePost ? "hidden" : "visible";
     document.getElementById("button-delete-post").style.visibility = updatePost ? "hidden" : "visible";
 }
+
 
 async function updatePost(event) {
     event.preventDefault();
@@ -40,7 +41,7 @@ async function updatePost(event) {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
+            // Send the user back to the dashboard to see the updated post
             document.location.replace("/dashboard");
         } else {
             alert("Couldn't update post");
@@ -62,6 +63,7 @@ async function promptForDelete(event) {
     }
 }
 
+
 async function deletePost() {    
     // Get post id from address bar
     let postId = window.location.pathname.split("/")[
@@ -77,13 +79,13 @@ async function deletePost() {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
+            // Send the user back to the dashboard since the post is deleted now
             document.location.replace("/dashboard");
         } else {
-            alert("Couldn't update post");
+            alert(`Couldn't delete post ${postId}`);
         }
     } catch (error) {
-        alert("Couldn't add new post");
+        alert(`Error with fetch. Couldn't delete post ${postId}`);
     }
 }
 
