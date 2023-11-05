@@ -4,7 +4,6 @@
   <p>{{formatDate post.createdAt}}</p>
   <p>{{post.content}}</p>
   <p>{{post.post_author}}</p>
-  <p>{{debug post}}</p>
 
   {{#each post.comments as |comment|}}
   {{> comment-details}}

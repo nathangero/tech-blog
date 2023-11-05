@@ -9,26 +9,28 @@ router.get("/", async (req, res) => {
             include: [
                 {
                     model: Comment,
-                    attributes: ["id", "content", "createdAt"],
-                    include: [ // Get the username of who made the comment
-                        {
-                            model: User,
-                            attributes: ["username"]
-                        }
+                    attributes: [
+                        "id",
+                        "content",
+                        "createdAt",
+                        [sequelize.literal(
+                            `(SELECT user.username FROM user WHERE comments.user_id = user.id)`
+                        ), "comment_author"],
                     ]
                 },
             ],
-            attributes: {
-                include: [
-                    [
-                        sequelize.literal(
-                            `(SELECT user.username FROM user WHERE post.user_id = user.id)`
-                        ),
-                        "post_author",
-                    ]
-                ]
-            }
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+                [sequelize.literal(
+                    `(SELECT user.username FROM user WHERE post.user_id = user.id)`
+                ), "post_author"],
+            ]
         });
+        
 
         if (data.length > 0) {
             const posts = data.map((element) => element.get({ plain: true }));

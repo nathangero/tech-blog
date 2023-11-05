@@ -1,4 +1,8 @@
 module.exports = {
+    debug(value) {
+        console.log(value);
+        console.log(JSON.stringify(value));
+    },
     formatDate(date) {
         const months = {
             0: "Jan",

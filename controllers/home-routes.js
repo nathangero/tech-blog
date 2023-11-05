@@ -10,7 +10,19 @@ const withAuth = require("../utils/auth");
 router.get("/", async (req, res) => {
     try {
         const data = await Post.findAll({
-            include: [{ model: Comment }],
+            include: [
+                {
+                    model: Comment,
+                    attributes: [
+                        "id",
+                        "content",
+                        "createdAt",
+                        [sequelize.literal(
+                            `(SELECT user.username FROM user WHERE comments.user_id = user.id)`
+                        ), "comment_author"],
+                    ]
+                },
+            ],
             attributes: [
                 "id",
                 "title",
@@ -19,14 +31,13 @@ router.get("/", async (req, res) => {
                 "updatedAt",
                 [sequelize.literal(
                     `(SELECT user.username FROM user WHERE post.user_id = user.id)`
-                ),
-                "post_author"],
+                ), "post_author"],
             ]
         });
 
-
         const posts = data.map((element) => element.get({ plain: true }));
-        console.log("posts:", posts);
+        // console.log("posts:", posts);
+        
         console.log("req.session.loggedIn:", req.session.loggedIn);
 
         res.render("homepage", {
@@ -44,17 +55,29 @@ router.get("/", async (req, res) => {
 router.get("/post/:id", async (req, res) => {
     try {
         const data = await Post.findByPk(req.params.id, {
-            include: [{ model: Comment }],
-            attributes: {
-                include: [
-                    [
-                        sequelize.literal(
-                            `(SELECT user.username FROM user WHERE post.user_id = user.id)`
-                        ),
-                        "posters_name",
+            include: [
+                {
+                    model: Comment,
+                    attributes: [
+                        "id",
+                        "content",
+                        "createdAt",
+                        [sequelize.literal(
+                            `(SELECT user.username FROM user WHERE comments.user_id = user.id)`
+                        ), "comment_author"],
                     ]
-                ]
-            }
+                },
+            ],
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+                [sequelize.literal(
+                    `(SELECT user.username FROM user WHERE post.user_id = user.id)`
+                ), "post_author"],
+            ]
         });
 
         const loggedIn = req.session.loggedIn;
