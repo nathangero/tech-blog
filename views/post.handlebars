@@ -1,9 +1,13 @@
-{{!-- Should be able to edit posts here --}}
 <section>
   <header>{{post.title}}</header>
   <p>{{formatDate post.createdAt}}</p>
   <p>{{post.content}}</p>
   <p>{{post.post_author}}</p>
+  <p>POST'S USER ID {{post.user_id}}</p>
+  {{#if post.user_id}}
+  <button>Edit</button>
+  <button>Delete</button>
+  {{/if}}
 
   {{#each post.comments as |comment|}}
   {{> comment-details}}

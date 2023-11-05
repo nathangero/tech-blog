@@ -89,6 +89,27 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.get("/dashboard/:userId", async (req, res) => {
+    try {
+        const data = await Post.findAll({
+            where: {
+                user_id: req.params.userId
+            },
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt"
+            ]
+        });
+
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
 // Create a new post
 router.post("/", async (req, res) => {
     const newPost = req.body;
@@ -109,7 +130,7 @@ router.post("/", async (req, res) => {
 });
 
 // Add a comment to a post
-router.post("/addComment/", async (req, res) => {
+router.post("/addComment", async (req, res) => {
     const newComment = req.body;
 
     if (req.session.userId) { // Check if userId is in the session. Should exist from user login

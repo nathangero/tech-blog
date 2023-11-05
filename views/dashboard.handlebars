@@ -1,2 +1,3 @@
-{{!-- Should be able to edit posts here --}}
-{{!-- Shows only the logged in user's posts --}}
+{{#each posts as |post|}}
+{{> user-posts}}
+{{/each}}

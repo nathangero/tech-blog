@@ -6,6 +6,7 @@ const sequelize = require("../config/connection");
 const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
+
 // Show the homepage
 router.get("/", async (req, res) => {
     try {
@@ -99,10 +100,44 @@ router.get("/post/:id", async (req, res) => {
     }
 });
 
+// Go to the user's dashboard if the user is logged in
+router.get("/dashboard", withAuth, async (req, res) => {
+    const userId = req.session.userId;
+    
+    try {
+        const data = await Post.findAll({
+            where: {
+                user_id: userId
+            },
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt",
+                "user_id" // Only include this when getting the dashboard posts
+            ]
+        });
+
+        const posts = data.map((element) => element.get({ plain: true }));
+        // console.log("posts:", posts);
+
+        res.render("dashboard", {
+            posts,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+
+// Show login
 router.get("/login", (req, res) => {
     res.render("login");
 });
 
+// Show signup
 router.get("/signup", (req, res) => {
     res.render("signup");
 });

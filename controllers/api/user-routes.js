@@ -26,9 +26,21 @@ router.get("/:id", async (req, res) => {
     const userId = req.params.id;
 
     try {
+         // Show all posts and comments of a user
         const data = await User.findByPk(userId, {
-            include: [{ model: Post }, { model: Comment }] // Show all posts and comments of a user
-        })
+            include: [
+                {
+                    model: Post,
+                    attributes: [
+                        "id",
+                        "title",
+                        "content",
+                        "createdAt",
+                        "updatedAt"
+                    ]
+                }
+            ]
+        });
 
         if (data) {
             const user = data.get({ plain: true });
