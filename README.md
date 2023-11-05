@@ -50,6 +50,8 @@ const data = await Post.findAll({
 
 [Sequelize nested eager loading](https://stackoverflow.com/a/33944634)
 
+[Passing in a parameter in event listener](https://plainenglish.io/blog/passing-arguments-to-event-listeners-in-javascript-1a81bc397ecb)
+
 ### Resources
 
 [cookie secure help](https://stackoverflow.com/questions/40324121/express-session-secure-true)

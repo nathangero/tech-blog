@@ -1,11 +1,35 @@
-{{!-- Should be able to edit posts here --}}
+{{!-- Show the clicked on post w/comments --}}
 <section>
   <header>{{post.title}}</header>
   <p>{{formatDate post.createdAt}}</p>
   <p>{{post.content}}</p>
   <p>{{post.post_author}}</p>
 
+  {{!-- If this is the user's post then show the edit/delete buttons --}}
+  {{#if loggedIn}}
+  <button id="button-delete-post">Delete</button>
+  <button id="button-update-post">Update</button>
+  {{/if}}
+
+  <form id="form-update-post" class="d-flex flex-column  w-50">
+    <textarea id="post-update-title" type="text" class="form-control" placeholder="Title">{{post.title}}</textarea>
+    <textarea id="post-update-content" type="text" class="form-control" placeholder="Content">{{post.content}}</textarea>
+    
+    <div>
+      <button id="button-cancel-update">Cancel</button>
+      <button id="button-confirm-update">Update Post</button>
+    </div>
+  </form>
+
   {{#each post.comments as |comment|}}
   {{> comment-details}}
   {{/each}}
+
+  {{!-- Allow adding a comment if coming from the Homepage --}}
+  {{!-- TODO: User does need to be logged in but shouldn't be the owner of the post --}}
+  {{#unless loggedIn}}
+  <button id="button-make-comment">Add Comment</button>
+  {{/unless}}
 </section>
+
+<script src="../../js/update-post.js"></script>

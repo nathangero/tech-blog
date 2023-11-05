@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { User, Post, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // Get all posts, its comments, and the username that posted it
 router.get("/", async (req, res) => {
@@ -89,19 +90,36 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// Create a new post
-router.post("/", async (req, res) => {
-    const newPost = req.body;
+// Get all posts of a user
+router.get("/dashboard/:userId", async (req, res) => {
+    try {
+        const data = await Post.findAll({
+            where: {
+                user_id: req.params.userId
+            },
+            attributes: [
+                "id",
+                "title",
+                "content",
+                "createdAt",
+                "updatedAt"
+            ]
+        });
 
-    if (req.session.userId) { // Check if userId is in the session. Should exist from user login
-        const userId = req.session.userId;
-        newPost["user_id"] = userId;
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error);
     }
+})
+
+// Create a new post
+router.post("/create", withAuth, async (req, res) => {
+    const newPost = req.body;
+    newPost["user_id"] = req.session.userId;
 
     try {
         const data = await Post.create(newPost);
-        
-        // TODO: change to res.redirect?
+
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
@@ -109,18 +127,14 @@ router.post("/", async (req, res) => {
 });
 
 // Add a comment to a post
-router.post("/addComment/", async (req, res) => {
+router.post("/addComment/:postId", withAuth, async (req, res) => {
     const newComment = req.body;
-
-    if (req.session.userId) { // Check if userId is in the session. Should exist from user login
-        const userId = req.session.userId;
-        newComment["user_id"] = userId;
-    }
+    newComment["user_id"] = req.session.userId;
+    newComment["post_id"] = req.params.id;
 
     try {
         const data = await Comment.create(newComment);
         
-        // TODO: change to res.redirect?
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
@@ -128,30 +142,34 @@ router.post("/addComment/", async (req, res) => {
 });
 
 // Update a post's title and content
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", withAuth, async (req, res) => {
     const postId = req.params.id;
+    const updatedPost = req.body;
+    updatedPost["user_id"] = req.session.userId;
 
+    console.log("updatedPost:", updatedPost);
+    console.log("postId:", postId);
     try {
-        const data = await Post.update(req.body, {
+        const data = await Post.update(updatedPost, {
             where: {
                 id: postId
             }
         });
 
         if (data[0]) {
-            // TODO: change to res.redirect?
             res.status(200).json({ message: "Successfully updated post" });
         } else {
             res.status(404).json({ "message": `No post with id ${postId}` });
         }
     } catch (error) {
+        console.log("errored out at .put(/update/:id)")
         res.status(500).json(error);
     }
 });
 
 
 // Delete a post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
     const postId = req.params.id;
 
     try {
