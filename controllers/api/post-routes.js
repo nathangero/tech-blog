@@ -169,7 +169,7 @@ router.put("/update/:id", withAuth, async (req, res) => {
 
 
 // Delete a post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
     const postId = req.params.id;
 
     try {
