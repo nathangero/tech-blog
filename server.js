@@ -18,7 +18,7 @@ const sess = {
     saveUninitialized: false,
     cookie: {
         maxAge: parseInt(process.env.COOKIE_AGE),
-        secure: false,
+        secure: true,
         sameSite: 'strict',
     },
     store: new SequelizeStore({
