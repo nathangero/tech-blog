@@ -52,3 +52,6 @@ const data = await Post.findAll({
 
 ### Resources
 
+[cookie secure help](https://stackoverflow.com/questions/40324121/express-session-secure-true)
+
+[Potential heroku cookie secure](https://stackoverflow.com/a/63105481)
