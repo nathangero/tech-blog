@@ -115,8 +115,7 @@ router.get("/dashboard/:userId", async (req, res) => {
 // Create a new post
 router.post("/create", withAuth, async (req, res) => {
     const newPost = req.body;
-    const userId = req.session.userId;
-    newPost["user_id"] = userId;
+    newPost["user_id"] = req.session.userId;
 
     try {
         const data = await Post.create(newPost);
@@ -128,18 +127,14 @@ router.post("/create", withAuth, async (req, res) => {
 });
 
 // Add a comment to a post
-router.post("/addComment", async (req, res) => {
+router.post("/addComment/:postId", withAuth, async (req, res) => {
     const newComment = req.body;
-
-    if (req.session.userId) { // Check if userId is in the session. Should exist from user login
-        const userId = req.session.userId;
-        newComment["user_id"] = userId;
-    }
+    newComment["user_id"] = req.session.userId;
+    newComment["post_id"] = req.params.id;
 
     try {
         const data = await Comment.create(newComment);
         
-        // TODO: change to res.redirect?
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error);
@@ -147,11 +142,13 @@ router.post("/addComment", async (req, res) => {
 });
 
 // Update a post's title and content
-router.put("/:id", async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
     const postId = req.params.id;
+    const updatedPost = req.body;
+    updatedPost["user_id"] = req.session.userId;
 
     try {
-        const data = await Post.update(req.body, {
+        const data = await Post.update(updatedPost, {
             where: {
                 id: postId
             }
