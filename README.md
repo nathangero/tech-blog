@@ -46,6 +46,11 @@ const data = await Post.findAll({
 });
 ```
 
+## Future Ideas
+
+- Adding a click count to each post. So, adding a new column in the db to account for the amount of times a blog has been clicked on.
+- Showing how many comments a blog post has on the Homepage and Dashboard
+
 ## Credits
 
 [Sequelize nested eager loading](https://stackoverflow.com/a/33944634)

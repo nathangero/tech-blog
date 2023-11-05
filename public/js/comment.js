@@ -38,8 +38,8 @@ async function addComment(event) {
         });
 
         if (response.ok) {
-            // If user is loggeed in then send them back to the homepage
-            document.location.replace(`/post/${postId}`);
+            // Reload the page to show the updated info
+            document.location.reload();
         } else {
             alert("Couldn't add comment");
         }
