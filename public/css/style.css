@@ -100,7 +100,7 @@ nav > a:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 50%;
+    width: 30%;
   }
 
   .card-title {
