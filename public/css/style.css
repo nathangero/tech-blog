@@ -62,12 +62,6 @@ nav > a:hover {
 }
 
 
-#form-post,
-#form-update-post {
-  display: none;
-}
-
-
 @media screen and (min-width: 769px) {
   body {
     background-color: var(--background-color);

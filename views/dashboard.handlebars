@@ -1,22 +1,14 @@
 {{!-- Show all the user's post in the Dashboard --}}
-<section>
-  <div class="posts">
+<section class="my-3">
+  <div id="dashboard-posts">
     {{#each posts as |post|}}
     {{> dashboard-posts}}
     {{/each}}
-    
-    <button id="button-make-post">Make New Post</button>
+
+    <button id="button-make-post" class="button m-3">Create Post</button>
   </div>
 
-  <form id="form-post" class="d-flex flex-column  w-50">
-    <input id="post-title" type="text" class="form-control" placeholder="Title">
-    <textarea id="post-content" type="text" class="form-control" placeholder="Content"></textarea>
-    
-    <div>
-      <button id="button-cancel-post">Cancel</button>
-      <button id="button-add-post">Add Post</button>
-    </div>
-  </form>
+  {{> new-post}}
 
 </section>
 

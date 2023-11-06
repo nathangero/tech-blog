@@ -8,14 +8,11 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  width: 100%;
 }
 
 .card-body {
   background-color: var(--background-color);
-}
-
-.post-date {
-  font-size: 20px;
 }
 
 @media screen and (min-width: 769px) {
