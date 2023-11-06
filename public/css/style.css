@@ -5,13 +5,13 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: purple;
   height: auto !important;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 120px;
+  font-size: 100px;
   color: black;
   width: 70%;
 }
@@ -22,25 +22,27 @@ nav {
   flex-direction: column;
 }
 
-nav a {
+nav > a {
   text-decoration: none;
   color: var(--white);
   font-size: 40px;
+}
+
+nav > a:hover {
+  color: var(--background-color);
 }
 
 .small-nav {
   position: fixed;
   right: 0;
   top: 0;
-}
-
-.dropdown {
-  background-color: red;
+  z-index: 999;
 }
 
 .big-nav {
   display: none;
 }
+
 
 .hamburger-menu {
   margin: 20px 20px;
@@ -58,6 +60,18 @@ nav a {
   background-color: var(--black);
 }
 
+.card {
+  border-radius: var(--border-radius);
+}
+
+.card-title {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+
+
 #form-post,
 #form-update-post,
 #form-comment {
@@ -69,10 +83,12 @@ nav a {
 
 @media screen and (min-width: 769px) {
   body {
-    background-color: purple;
+    background-color: var(--background-color);
   }
 
   h1 {
+    font-size: 120px;
+    color: black;
     width: 100%;
   }
 
@@ -85,5 +101,12 @@ nav a {
     flex-direction: row;
     justify-content: space-between;
     width: 50%;
+  }
+
+  .card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }

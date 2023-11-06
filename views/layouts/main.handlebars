@@ -10,38 +10,41 @@
 </head>
 
 <body>
-  <header class="ml-2">
-    <h1 class="has-text-left-mobile">The Tech Blog</h1>
-
-    <!-- Mobile nav bar -->
-    <div class="dropdown is-hoverable is-right mr-1 mt-1 small-nav">
-      <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-          <div class="hamburger-menu">
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
-          </div>
-        </button>
-      </div>
+  <header class="has-background-dark pl-2">
+    <div class="title-navbar">
+      <h1 class="has-text-left-mobile has-text-white">The Tech Blog</h1>
       
+      <!-- Mobile nav bar -->
+      <div class="dropdown is-hoverable is-right mr-1 mt-1 small-nav">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <div class="hamburger-menu">
+              <div class="hamburger-line"></div>
+              <div class="hamburger-line"></div>
+              <div class="hamburger-line"></div>
+            </div>
+          </button>
+        </div>
+        
 
-      <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-          <a class="dropdown-item" href="/">Home</a>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a class="dropdown-item" href="/">Home</a>
 
-          <hr class="dropdown-divider">
-          <a class="dropdown-item" href="/dashboard">Dashboard</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/dashboard">Dashboard</a>
 
-          <hr class="dropdown-divider">
-          {{#if loggedIn}}
-          <a id="button-logout" class="dropdown-item" role="button">Logout</a>
-          {{else}}
-          <a class="dropdown-item" href="/login">Login</a>
-          {{/if}}
+            <hr class="dropdown-divider">
+            {{#if loggedIn}}
+            <a id="button-logout" class="dropdown-item" role="button">Logout</a>
+            {{else}}
+            <a class="dropdown-item" href="/login">Login</a>
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>
+
 
     <!-- Desktop nav bar -->
     <nav class="big-nav">
@@ -57,6 +60,9 @@
 
   <main>
     {{{body}}}
+
+    {{!-- For mobile to bump up what's at the bottom of the page --}}
+    <br>
   </main>
 
   {{#if loggedIn}}

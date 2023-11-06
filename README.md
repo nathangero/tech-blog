@@ -12,6 +12,7 @@
 ## Learning Points
 
 * Establishing relationships between tables and their columns in Sequelize is a little tricky. Even though I know a User has many Comments, I still had to establish that a Comment belongs to a User. This allowed nested eager loading possible as seen [below](#nested-eager-loading)
+* Using Bulma was easier to work with than Bootstrap surprisingly enough.
 
 ## Code Snippets
 

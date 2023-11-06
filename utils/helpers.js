@@ -26,7 +26,8 @@ module.exports = {
         const hour = date.getHours();
         const minute = date.getMinutes();
 
-        return `${month} ${day}, ${year} - ${hour}:${minute}`
+        return `${month} ${day}, ${year}`
+        // return `${month} ${day}, ${year} - ${hour}:${minute}`
     },
     canAddPost(isLoggedIn, fromDashboard) {
         return isLoggedIn && fromDashboard;
