@@ -60,6 +60,10 @@ const data = await Post.findAll({
 
 [Passing in a parameter in event listener](https://plainenglish.io/blog/passing-arguments-to-event-listeners-in-javascript-1a81bc397ecb)
 
+[Using .svg file as favicon](https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df)
+
+[My SVG Generator](https://github.com/nathangero/svg-logo-maker)
+
 ### Resources
 
 [cookie secure help](https://stackoverflow.com/questions/40324121/express-session-secure-true)
