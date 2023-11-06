@@ -1,12 +1,28 @@
-<section class="d-flex flex-column justify-content-center">
+<section class="columns is-mobile login">
   <h2>Login</h2>
-  <form id="form-login" class="d-flex flex-column  w-50">
-    <input id="login-email" type="email" class="form-control" placeholder="Email">
-    <input id="login-password" type="password" class="form-control" placeholder="Password">
-    <button id="login-button" type="submit", class="btn btn-primary w-25">Login</button>
+  <form id="form-login" class="column is-5">
+    <div class="field">
+      <div class="control">
+        <input id="login-email" type="email" class="input " placeholder="Email">
+      </div>
+    </div>
+    
+    <div class="field">
+      <div class="control">
+        <input id="login-password" type="password" class="input" placeholder="Password">
+      </div>
+    </div>
+
+    <div class="field column is-narrow">
+      <div class="control">
+        <button id="login-button" type="submit", class="button is-dark">Login</button>
+      </div>
+    </div>
   </form>
 
-  <p>New user? <a href="/signup">click here</a></p>
+  <div class="text-new-user">
+    <p>New user? <a href="/signup">click here</a></p>
+  </div>
 </section>
 
 <script src="./js/login.js"></script>
