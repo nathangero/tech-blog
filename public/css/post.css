@@ -1,0 +1,16 @@
+.update-delete-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Don't show form on page load, but when it does show have flex-direction set */
+#form-post,
+#form-update-post {
+  display: none;
+  flex-direction: column;
+}
+  
+#form-post button,
+#form-update-post button {
+  width: 100%;
+}

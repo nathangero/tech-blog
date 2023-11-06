@@ -3,9 +3,14 @@ function toggleEditPost(event, updatePost) {
     event.stopPropagation();
 
     // Show/Hide the new post form
-    document.getElementById("form-update-post").style.visibility = updatePost ? "visible" : "hidden";
-    document.getElementById("button-update-post").style.visibility = updatePost ? "hidden" : "visible";
-    document.getElementById("button-delete-post").style.visibility = updatePost ? "hidden" : "visible";
+    document.getElementById("form-update-post").style.display = updatePost ? "flex" : "none";
+    document.getElementById("button-update-post").style.display = updatePost ? "none" : "flex";
+    document.getElementById("button-delete-post").style.display = updatePost ? "none" : "flex";
+
+    // Scroll to the form to make it easier for the user
+    if (updatePost) {
+        document.getElementById("form-update-post").scrollIntoView();
+    }
 }
 
 

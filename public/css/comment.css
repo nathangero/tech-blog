@@ -1,0 +1,9 @@
+/* Don't show form on page load, but when it does show have flex-direction set */
+#form-comment {
+  display: none;
+  flex-direction: column;
+}
+
+#form-comment button {
+  width: 100%;
+}

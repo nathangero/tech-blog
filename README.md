@@ -12,6 +12,9 @@
 ## Learning Points
 
 * Establishing relationships between tables and their columns in Sequelize is a little tricky. Even though I know a User has many Comments, I still had to establish that a Comment belongs to a User. This allowed nested eager loading possible as seen [below](#nested-eager-loading)
+* Using Bulma was easier to work with than Bootstrap surprisingly enough.
+* If two elements share the same HTML id, they can**NOT** share the same event listener. Only the first one delcared in the HTML will get the listener attached. So, I had to create two different ids for the Logout button.
+* Using `role="button"` tag for a `<a>` tag is really helpful for navigation bars. It let me keep the style of the nav bar elements but giving me the attributes of a button like `.addEventListener`
 
 ## Code Snippets
 
@@ -62,3 +65,5 @@ const data = await Post.findAll({
 [cookie secure help](https://stackoverflow.com/questions/40324121/express-session-secure-true)
 
 [Potential heroku cookie secure](https://stackoverflow.com/a/63105481)
+
+[Bulma colors](https://bulma.io/documentation/helpers/color-helpers/)

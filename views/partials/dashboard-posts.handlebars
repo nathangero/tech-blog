@@ -1,5 +1,9 @@
-{{!-- Show only the title and date created.  --}}
-<section>
-  <a href="/dashboard/post/{{id}}">{{title}}</a>
-  {{formatDate createdAt}}
+{{!-- Show only the title and date created. --}}
+<section class="card is-shadowless mx-3 my-3">
+  <a href="/dashboard/post/{{id}}">
+    <div class="is-flex is-justify-content-space-between has-background-dark has-text-white p-3 card-title">
+      <h2 class="has-text-weight-bold">{{title}}</h2>
+      <p class="has-text-right-mobile">{{formatDate createdAt false}}</p>
+    </div>
+  </a>
 </section>

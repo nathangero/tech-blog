@@ -72,13 +72,13 @@ router.post("/signup", async (req, res) => {
 
 // Login a user
 router.post("/login", async (req, res) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const enteredPassword = req.body.password;
 
     try {
         const data = await User.findOne({
             where: {
-                email: email
+                username: username
             }
         });
 
@@ -91,7 +91,7 @@ router.post("/login", async (req, res) => {
         // Check if password is correct
         const isPasswordValid = data.comparePassword(enteredPassword);
         if (!isPasswordValid) {
-            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            res.status(400).json({ message: 'Incorrect username or password. Please try again!' });
             return;
         }
 

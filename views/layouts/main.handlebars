@@ -5,27 +5,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/homepage.css">
+  <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="/css/post.css">
+  <link rel="stylesheet" type="text/css" href="/css/comment.css">
 </head>
 
 <body>
-  <header>
-    <h1>Tech Blog</h1>
-  </header>
+  <header class="has-background-dark pl-2">
+    <div class="title-navbar">
+      <h1 class="has-text-left-mobile has-text-white">The Tech Blog</h1>
+      
+      <!-- Mobile nav bar -->
+      <div class="dropdown is-hoverable is-right mr-1 mt-1 small-nav">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <div class="hamburger-menu">
+              <div class="hamburger-line"></div>
+              <div class="hamburger-line"></div>
+              <div class="hamburger-line"></div>
+            </div>
+          </button>
+        </div>
+        
 
-  <nav>
-    <a href="/">Home</a>
-    <a href="/dashboard">Dashboard</a>
-    {{#if loggedIn}}
-    <button id="button-logout" class="btn">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
-    {{/if}}
-  </nav>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a class="dropdown-item" href="/">Home</a>
+
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/dashboard">Dashboard</a>
+
+            <hr class="dropdown-divider">
+            {{#if loggedIn}}
+            <a id="dropdown-logout" class="dropdown-item" role="button">Logout</a>
+            {{else}}
+            <a class="dropdown-item" href="/login">Login</a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Desktop nav bar -->
+    <nav class="big-nav has-text-left-desktop">
+      <a href="/" class="mr-5">Home</a>
+      <a href="/dashboard" class="mr-5">Dashboard</a>
+      {{#if loggedIn}}
+      <a id="navbar-logout" class="has-background-dark" role="button">Logout</a>
+      {{else}}
+      <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+  </header>
 
   <main>
     {{{body}}}
+
+    {{!-- For mobile to bump up what's at the bottom of the page --}}
+    <br>
   </main>
 
   {{#if loggedIn}}

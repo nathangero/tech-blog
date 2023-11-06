@@ -3,8 +3,8 @@ function toggleNewPost(event, makeNewPost) {
     event.stopPropagation();
 
     // Show the new post form
-    document.getElementById("form-post").style.visibility = makeNewPost ? "visible" : "hidden";
-    document.getElementById("button-make-post").style.visibility = makeNewPost ? "hidden" : "visible";
+    document.getElementById("form-post").style.display = makeNewPost ? "flex" : "none";
+    document.getElementById("dashboard-posts").style.display = makeNewPost ? "none" : "flex";
 }
 
 async function addNewPost(event) {

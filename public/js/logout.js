@@ -1,4 +1,7 @@
-async function logoutUser() {
+async function logoutUser(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     try {
         const response = await fetch("/api/users/logout", {
             method: "POST",
@@ -16,4 +19,5 @@ async function logoutUser() {
     }
 }
 
-document.getElementById("button-logout").addEventListener("click", logoutUser);
+document.getElementById("dropdown-logout").addEventListener("click", logoutUser);
+document.getElementById("navbar-logout").addEventListener("click", logoutUser);
