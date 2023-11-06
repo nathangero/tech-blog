@@ -91,17 +91,5 @@ nav > a:hover {
     width: 30%;
   }
 
-  /* Disguise Logout button too look like the <a> tags in the nav */
-  .big-nav button {
-    color: var(--white);
-    font-size: 40px;
-    border: 0;
-    cursor: pointer;
-  }
-
-  .big-nav button:hover {
-    color: var(--background-color);
-  }
-
 
 }

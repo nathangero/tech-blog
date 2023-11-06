@@ -39,7 +39,7 @@
 
             <hr class="dropdown-divider">
             {{#if loggedIn}}
-            <a id="button-logout" class="dropdown-item" role="button">Logout</a>
+            <a id="dropdown-logout" class="dropdown-item" role="button">Logout</a>
             {{else}}
             <a class="dropdown-item" href="/login">Login</a>
             {{/if}}
@@ -54,7 +54,7 @@
       <a href="/" class="mr-5">Home</a>
       <a href="/dashboard" class="mr-5">Dashboard</a>
       {{#if loggedIn}}
-      <button id="button-logout" class="has-background-dark">Logout</button>
+      <a id="navbar-logout" class="has-background-dark" role="button">Logout</a>
       {{else}}
       <a href="/login">Login</a>
       {{/if}}
