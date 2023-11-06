@@ -3,7 +3,7 @@ module.exports = {
         console.log(value);
         console.log(JSON.stringify(value));
     },
-    formatDate(date) {
+    formatDate(date, showTime) {
         const months = {
             0: "Jan",
             1: "Feb",
@@ -23,11 +23,11 @@ module.exports = {
         const day = date.getDate();
         const year = date.getFullYear();
         
-        const hour = date.getHours();
-        const minute = date.getMinutes();
+        // For 24-hour time, put a 0 before the digit if the digit is less than 10.
+        const hour = String(date.getHours()).length < 2 ? `0${date.getHours()}` : date.getHours();
+        const minute = String(date.getMinutes()).length < 2 ? `0${date.getMinutes()}` : date.getMinutes();
 
-        return `${month} ${day}, ${year}`
-        // return `${month} ${day}, ${year} - ${hour}:${minute}`
+        return showTime ? `${month} ${day}, ${year} - ${hour}:${minute}` : `${month} ${day}, ${year}`
     },
     canAddPost(isLoggedIn, fromDashboard) {
         return isLoggedIn && fromDashboard;
