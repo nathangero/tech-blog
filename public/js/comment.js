@@ -3,8 +3,8 @@ async function toggleAddComment(event, addComment) {
     event.stopPropagation();
 
     // Show/hide the new comment form
-    document.getElementById("form-comment").style.visibility = addComment ? "visible" : "hidden";
-    document.getElementById("button-make-comment").style.visibility = addComment ? "hidden" : "visible";
+    document.getElementById("form-comment").style.display = addComment ? "flex" : "none";
+    document.getElementById("button-make-comment").style.display = addComment ? "none" : "flex";
 }
 
 

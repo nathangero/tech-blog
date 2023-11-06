@@ -65,7 +65,7 @@ nav > a:hover {
 #form-post,
 #form-update-post,
 #form-comment {
-  visibility: hidden;
+  display: none;
 }
 
 

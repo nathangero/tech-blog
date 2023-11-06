@@ -1,6 +1,7 @@
-<section>
-  <hr>
-  <header>{{comment_author}}</header>
-  <p>{{formatDate createdAt}}</p>
-  <p>{{content}}</p>
+<section class="card is-shadowless has-border mx-3 my-5">
+  <div class="has-background-dark has-text-white p-4 card-title"></div>
+  <div class="card-body">
+    <p class="has-text-white is-text-start p-3">{{content}}</p>
+    <p class="has-text-white is-text-start p-3">- {{comment_author}}, {{formatDate createdAt}}</p>
+  </div>
 </section>
