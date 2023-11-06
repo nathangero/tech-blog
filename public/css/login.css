@@ -1,15 +1,18 @@
-.login {
+.login,
+.signup {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: white;
 }
 
-.login h2 {
+.login h2,
+.signup h2 {
     font-size: 60px;
 }
 
-.login button {
+.login button,
+.signup button {
     width: 100%;
 }
 
