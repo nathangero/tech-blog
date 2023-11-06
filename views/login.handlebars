@@ -1,60 +1,35 @@
-{{!-- <section class="columns is-mobile login">
-  <h2>Login</h2>
-  <form id="form-login" class="column is-6">
-    <div class="field">
-      <div class="control">
-        <input id="login-username" type="text" class="input " placeholder="Username">
-      </div>
-    </div>
-    
-    <div class="field">
-      <div class="control">
-        <input id="login-password" type="password" class="input" placeholder="Password">
-      </div>
-    </div>
+<section class="card is-shadowless has-border mx-3 my-5 login">
+  <div class="has-background-dark has-text-white p-3 card-title">
+    <h2 class="has-text-weight-bold fs-5">Login</h2>
+  </div>
 
-    <div class="field column is-narrow">
-      <div class="control">
-        <button id="login-button" type="submit", class="button is-dark">Login</button>
+  <form id="form-login">
+    <div class="card-body">
+      <div class="field column">
+        <label class="label">Username</label>
+        <div class="control">
+          <input id="login-username" type="text" class="input">
+        </div>
+      </div>
+
+      <div class="field column">
+        <label class="label">Password</label>
+        <div class="control">
+          <input id="login-password" type="password" class="input">
+        </div>
+      </div>
+
+      <div class="field column">
+        <div class="control">
+          <button id="login-button" type="submit" , class="button is-dark">Login</button>
+        </div>
+      </div>
+
+      <div class="text-new-user p-3">
+        <p>New user? <a href="/signup">Sign up here</a></p>
       </div>
     </div>
   </form>
-
-  <div class="text-new-user">
-    <p>New user? <a href="/signup">Signup here</a></p>
-  </div>
-</section> --}}
-
-<section class="card is-shadowless has-border mx-3 my-5 login">
-  <div class="has-background-dark has-text-white p-3 card-title">
-    <h2 class="has-text-weight-bold fs-5">Login</h2></p>
-  </div>
-  
-  <div id="form-login" class="card-body">
-    <div class="field column">
-      <label class="label">Username</label>
-      <div class="control">
-        <input id="login-username" type="text" class="input">
-      </div>
-    </div>
-    
-    <div class="field column">
-      <label class="label">Password</label>
-      <div class="control">
-        <input id="login-password" type="password" class="input">
-      </div>
-    </div>
-
-    <div class="field column">
-      <div class="control">
-        <button id="login-button" type="submit", class="button is-dark">Login</button>
-      </div>
-    </div>
-
-    <div class="text-new-user p-3">
-      <p>New user? <a href="/signup">Sign up here</a></p>
-    </div>
-  </div>
 </section>
 
 <script src="./js/login.js"></script>
