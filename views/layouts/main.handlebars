@@ -7,7 +7,9 @@
   <title>Tech Blog</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/homepage.css">
   <link rel="stylesheet" type="text/css" href="/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 </head>
 
 <body>
@@ -52,7 +54,7 @@
       <a href="/" class="mr-5">Home</a>
       <a href="/dashboard" class="mr-5">Dashboard</a>
       {{#if loggedIn}}
-      <a id="button-logout" role="button" class="mr-5">Logout</a>
+      <button id="button-logout" class="has-background-dark">Logout</button>
       {{else}}
       <a href="/login">Login</a>
       {{/if}}

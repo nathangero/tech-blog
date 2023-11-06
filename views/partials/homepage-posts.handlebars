@@ -1,13 +1,13 @@
 {{!-- Show the details of a post on the Homepage --}}
-<section class="card mx-3 my-5">
+<section class="card is-shadowless has-border mx-3 my-5">
   <a href="/post/{{id}}">
     <div class="has-background-dark has-text-white p-3 card-title">
       <h2 class="has-text-weight-bold">{{title}}</h2>
       <p class="has-text-right-mobile">Created by {{post_author}} on {{formatDate createdAt}}</p>
     </div>
     
-    <div class="">
-      <p class="has-text-black is-text-start p-3">{{content}}</p>
+    <div class="card-body">
+      <p class="has-text-white is-text-start p-3">{{content}}</p>
     </div>
   </a>
 </section>

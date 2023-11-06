@@ -2,6 +2,7 @@
   --background-color: deepskyblue;
   --white: white;
   --black: black;
+  --bulma-dark:	#363636;
 }
 
 body {
@@ -60,25 +61,12 @@ nav > a:hover {
   background-color: var(--black);
 }
 
-.card {
-  border-radius: var(--border-radius);
-}
-
-.card-title {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-
 
 #form-post,
 #form-update-post,
 #form-comment {
   visibility: hidden;
 }
-
-
 
 
 @media screen and (min-width: 769px) {
@@ -103,10 +91,17 @@ nav > a:hover {
     width: 30%;
   }
 
-  .card-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  /* Disguise Logout button too look like the <a> tags in the nav */
+  .big-nav button {
+    color: var(--white);
+    font-size: 40px;
+    border: 0;
+    cursor: pointer;
   }
+
+  .big-nav button:hover {
+    color: var(--background-color);
+  }
+
+
 }
