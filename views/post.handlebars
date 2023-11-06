@@ -1,9 +1,10 @@
 {{!-- Show the clicked on post w/comments --}}
-<section>
-  <div class="card is-shadowless has-border mx-3 my-5">
+<section class="mx-3">
+  <div class="card is-shadowless has-border my-5">
     <div class="has-background-dark has-text-white p-3 card-title">
       <h2 class="has-text-weight-bold fs-5">{{post.title}}</h2>
-      <p class="has-text-right-mobile fs-5 post-date">Created by {{post.post_author}} on {{formatDate post.createdAt}}</p>
+      <p class="has-text-right-mobile fs-5 post-date">Created by {{post.post_author}} on {{formatDate post.createdAt}}
+      </p>
     </div>
 
     <div class="card-body">
@@ -19,8 +20,9 @@
 
   <form id="form-update-post" class="d-flex flex-column  w-50">
     <textarea id="post-update-title" type="text" class="form-control" placeholder="Title">{{post.title}}</textarea>
-    <textarea id="post-update-content" type="text" class="form-control" placeholder="Content">{{post.content}}</textarea>
-    
+    <textarea id="post-update-content" type="text" class="form-control"
+      placeholder="Content">{{post.content}}</textarea>
+
     <div>
       <button id="button-cancel-update">Cancel</button>
       <button id="button-confirm-update">Update Post</button>
@@ -33,17 +35,11 @@
 
   {{!-- Allow adding a comment if coming from the Homepage and logged in --}}
   {{#if (canAddComment loggedIn fromHomepage)}}
-  <button id="button-make-comment">Add Comment</button>
+  <button id="button-make-comment" class="button">Add Comment</button>
   {{/if}}
 
-  <form id="form-comment" class="d-flex flex-column  w-50">
-    <textarea id="comment-content" type="text" class="form-control" placeholder="Comment"></textarea>
-    
-    <div>
-      <button id="button-cancel-comment">Cancel</button>
-      <button id="button-add-comment">Post Comment</button>
-    </div>
-  </form>
+  {{> new-comment}}
+
 </section>
 
 {{!-- Decide which file to load --}}

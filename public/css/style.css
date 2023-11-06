@@ -63,8 +63,7 @@ nav > a:hover {
 
 
 #form-post,
-#form-update-post,
-#form-comment {
+#form-update-post {
   display: none;
 }
 
