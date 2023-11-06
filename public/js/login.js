@@ -2,16 +2,16 @@ async function loginUser(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    const email = document.getElementById("login-email").value.trim();
+    const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value.trim();
 
-    if (!email || !password) {
-        alert("Fill out both email and password");
+    if (!username || !password) {
+        alert("Fill out both username and password");
         return;
     }
 
     const login = {
-        email: email,
+        username: username,
         password: password
     }
 
@@ -26,10 +26,9 @@ async function loginUser(event) {
 
         if (response.ok) {
             // If user is loggeed in then send them back to the homepage
-            console.log("Logged in!");
             document.location.replace("/");
         } else {
-            alert("Invalid email and/or password");
+            alert("Invalid username and/or password");
         }
     } catch (error) {
         console.error(error);

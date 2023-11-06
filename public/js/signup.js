@@ -3,17 +3,15 @@ async function signupUser(event) {
     event.stopPropagation();
 
     const username = document.getElementById("signup-username").value.trim();
-    const email = document.getElementById("signup-email").value.trim();
     const password = document.getElementById("signup-password").value.trim();
 
-    if (!username || !email || !password) {
+    if (!username || !password) {
         alert("Fill out all fields");
         return;
     }
 
     const newUser = {
         username: username,
-        email: email,
         password: password
     }
 
