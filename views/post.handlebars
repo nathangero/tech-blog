@@ -14,20 +14,13 @@
 
   {{!-- If this is the user's post and logged in then show the edit/delete buttons --}}
   {{#if (canAddPost loggedIn fromDashboard)}}
-  <button id="button-delete-post">Delete</button>
-  <button id="button-update-post">Update</button>
+  <div class="update-delete-buttons">
+    <button id="button-delete-post" class="button mr-3">Delete</button>
+    <button id="button-update-post" class="button">Update</button>
+  </div>
   {{/if}}
 
-  <form id="form-update-post" class="d-flex flex-column  w-50">
-    <textarea id="post-update-title" type="text" class="form-control" placeholder="Title">{{post.title}}</textarea>
-    <textarea id="post-update-content" type="text" class="form-control"
-      placeholder="Content">{{post.content}}</textarea>
-
-    <div>
-      <button id="button-cancel-update">Cancel</button>
-      <button id="button-confirm-update">Update Post</button>
-    </div>
-  </form>
+  {{> update-post}}
 
   {{#each post.comments as |comment|}}
   {{> comment-details}}
