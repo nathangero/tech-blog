@@ -33,6 +33,9 @@ router.get("/", async (req, res) => {
                 [sequelize.literal(
                     `(SELECT user.username FROM user WHERE post.user_id = user.id)`
                 ), "post_author"],
+            ],
+            order: [
+                ["createdAt", "DESC"]
             ]
         });
 
@@ -120,6 +123,9 @@ router.get("/dashboard", withAuth, async (req, res) => {
                 "createdAt",
                 "updatedAt",
                 "user_id" // Only include this when getting the dashboard posts
+            ],
+            order: [
+                ["createdAt", "DESC"]
             ]
         });
 
