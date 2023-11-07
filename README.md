@@ -136,6 +136,33 @@ canAddComment(isLoggedIn, fromHomepage) {
 {{/if}}
 ```
 
+### Idle Timer
+
+Code for making an idle timer that's called in the `comment.js`, `post.js`, and `update-post.js` files.
+```js
+function setupIdleTimer() {
+    let count = IDLE_TIME;
+    const timer = setInterval(async () => {
+        if (count === 0) {
+            clearInterval(timer);
+
+            await fetch("/api/users/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            document.location.reload();
+            return;
+        } else {
+            count--;
+        }
+
+    }, COUNTDOWN_INTERVAL);
+}
+```
+
 ## Images
 
 Homepage on desktop screen
