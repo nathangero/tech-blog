@@ -1,3 +1,7 @@
+import { setupIdleTimer } from "./idle-timer.js";
+
+setupIdleTimer();
+
 async function toggleAddComment(event, addComment) {
     event.preventDefault();
     event.stopPropagation();
@@ -10,7 +14,6 @@ async function toggleAddComment(event, addComment) {
     if (addComment) {
         document.getElementById("form-comment").scrollIntoView();
     }
-    
 }
 
 
@@ -54,9 +57,24 @@ async function addComment(event) {
     }
 }
 
-
 document.querySelector("#button-make-comment").addEventListener("click", (event) => toggleAddComment(event, true));
 document.querySelector("#button-cancel-comment").addEventListener("click", (event) => toggleAddComment(event, false));
 document.querySelector("#button-add-comment").addEventListener("click", addComment);
 
-console.log("HELLO FROM COMMENT.JS")
+
+// Make event listeners to check if user is idle or not.
+// Idle means not moving the mouse or typing. That way the page won't refresh while the user is doing something
+document.addEventListener("mousemove", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // console.log("@update-post document body mouse move");
+    setupIdleTimer();
+})
+
+document.addEventListener("keydown", (e) => {
+    e.stopPropagation();
+
+    // console.log("@update-post document body keydown");
+    setupIdleTimer();
+})

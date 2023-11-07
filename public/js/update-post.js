@@ -1,3 +1,7 @@
+import { setupIdleTimer } from "./idle-timer.js";
+
+setupIdleTimer();
+
 function toggleEditPost(event, updatePost) {
     event.preventDefault();
     event.stopPropagation();
@@ -99,3 +103,21 @@ document.querySelector("#button-cancel-update").addEventListener("click", (event
 document.querySelector("#button-confirm-update").addEventListener("click", updatePost);
 
 document.querySelector("#button-delete-post").addEventListener("click", promptForDelete);
+
+
+// Make event listeners to check if user is idle or not.
+// Idle means not moving the mouse or typing. That way the page won't refresh while the user is doing something
+document.addEventListener("mousemove", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // console.log("@update-post document body mouse move");
+    setupIdleTimer();
+})
+
+document.addEventListener("keydown", (e) => {
+    e.stopPropagation();
+
+    // console.log("@update-post document body keydown");
+    setupIdleTimer();
+})

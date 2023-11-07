@@ -37,9 +37,9 @@
 
 {{!-- Decide which file to load --}}
 {{#if (canAddPost loggedIn fromDashboard)}}
-<script src="../../js/update-post.js"></script>
+<script type="module" src="../../js/update-post.js"></script>
 {{/if}}
 
 {{#if (canAddComment loggedIn fromHomepage)}}
-<script src="../../js/comment.js"></script>
+<script type="module" src="../../js/comment.js"></script>
 {{/if}}
