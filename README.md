@@ -12,6 +12,7 @@ Deployed website: [The Tech Blog](https://tech-blog-nathangero-142ac22ce678.hero
 |:-|:-:|
 | Javascript | [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) |
 | CSS | [docs](https://developer.mozilla.org/en-US/docs/Web/CSS) |
+| Bulma framework | [docs](https://bulma.io/documentation/) |
 | Express JS | [docs](https://expressjs.com) |
 | Express Handlebars | [docs](https://www.npmjs.com/package/express-handlebars) |
 | Handlebars | [docs](https://handlebarsjs.com) |
@@ -76,10 +77,16 @@ When making a comment, you must fill the Content field.
 
 ## Learning Points
 
-* Establishing relationships between tables and their columns in Sequelize is a little tricky. Even though I know a User has many Comments, I still had to establish that a Comment belongs to a User. This allowed nested eager loading possible as seen [below](#nested-eager-loading)
-* Using Bulma was easier to work with than Bootstrap surprisingly enough.
+* Using `sequelize.literal()` and knowing how the JSON is returned is so important. When getting all Posts and their Comments, I wanted to get the username for each comment. I used `sequelize.literal()` but the WHERE clause wouldn't work until I did `WHERE comments.user_id`. I was doing `comment.user_id` and not realizing that the JSON response had the Post's comments listed as `comments` as opposed to `comment`. This caused a lot of headache, but I know now how it works! You can see my code [below](#nested-eager-loading)
+* Using [Bulma](https://bulma.io/documentation/) was easier to work with than Bootstrap surprisingly enough. I had used Bulma in a previous project called [Food Finder](https://github.com/FenriRagni/food-finder), but I didn't think much of it outside of "let's try another framework." In my opinion, the Bulma class names are much easier to understand and memorize, despite their long nature. That's ultimately why I used Bulma in this project than Bootstrap.
 * If two elements share the same HTML id, they can**NOT** share the same event listener. Only the first one delcared in the HTML will get the listener attached. So, I had to create two different ids for the Logout button.
 * Using `role="button"` tag for a `<a>` tag is really helpful for navigation bars. It let me keep the style of the nav bar elements but giving me the attributes of a button like `.addEventListener`
+* Using Heroku's JAWSDB was very easy to deploy to! Once I set it up in my Heroku project's settings, I just added this code and it all worked!
+```js
+if (process.env.JAWSDB_URL) {
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
+}
+```
 
 ## Code Snippets
 
@@ -114,10 +121,46 @@ const data = await Post.findAll({
 });
 ```
 
+### Custom Handlebar Helper
+
+Using custom handlebar helpers to show if a user can add a comment to a post
+```js
+canAddComment(isLoggedIn, fromHomepage) {
+    return isLoggedIn && fromHomepage;
+}
+```
+
+```handlebars
+{{#if (canAddComment loggedIn fromHomepage)}}
+  <button id="button-make-comment" class="button">Add Comment</button>
+{{/if}}
+```
+
+## Images
+
+Homepage on desktop screen
+
+<img src="./public/images/desktop-homepage.PNG" width="500" alt="Homepage on a desktop screen showing blogs from users">
+
+<br>
+New Post screen
+
+<img src="./public/images/new-post.PNG" width="500" alt="New Post screen with title and content fields to fill out">
+
+<br>
+Homepage on mobile screen
+
+<img src="./public/images/mobile-homepage.PNG" height="500" alt="Homepage on a mobile screen showing blogs from users">
+
+
 ## Future Ideas
 
 - Adding a click count to each post. So, adding a new column in the db to account for the amount of times a blog has been clicked on.
 - Showing how many comments a blog post has on the Homepage and Dashboard
+
+## Key Takeaway 
+
+Full-stack web development is fun! I had a blast making this even though it was really frustrating at times. Using express.js with handlebars to render webpages from a server was pretty interesting, and makes me think how big production websites work. I know there's a multitude of tech stack combinations out there, and I'm interested in learning more of them!
 
 ## Credits
 
