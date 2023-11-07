@@ -3,7 +3,7 @@ import { setupIdleTimer } from "./idle-timer.js";
 setupIdleTimer();
 
 async function toggleAddComment(event, addComment) {
-    event.preventDefault();
+    // event.preventDefault();
     event.stopPropagation();
 
     // Show/hide the new comment form
@@ -65,7 +65,7 @@ document.querySelector("#button-add-comment").addEventListener("click", addComme
 // Make event listeners to check if user is idle or not.
 // Idle means not moving the mouse or typing. That way the page won't refresh while the user is doing something
 document.addEventListener("mousemove", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     e.stopPropagation();
     
     // console.log("@update-post document body mouse move");
